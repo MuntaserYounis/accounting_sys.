@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Car</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="float-end"><a href="/logout">logout</a></div>
+        <form action="/adding_car" method="post">
+            {% csrf_token %}
+            <h3>Add your car !</h3>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Car</label><input type="text" name="the_type"><br>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Manufacturing Year:</label><input type="text" name="man_year"><br>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Rent Price: $</label><input type="text" name="rent_price" placeholder="$ {{ cars.rent_price__avg|default_if_none:'' }}"><br>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Yearly Insurance: $</label><input type="text" name="insurance"><br>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Monthly Maintenance: $</label><input type="text" name="maintenance"><br>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Monthly Payments: $</label><input type="text" name="payments"><br>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Acquiring Date</label><input type="date" name="acquiring_date"><br>
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Rent Status: </label><select name="rent_status">
+                <option value="True">Available</option>
+                <option value="False">Rented</option>
+            </select> <br>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary active" aria-current="page">Confirm</button>
+        </form>
+        <form action="/main" method="post">
+            {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Go Back</button>
+            </div>
+        </form>
+        
+    </div>
+
+</body>
+</html>

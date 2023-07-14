@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="float-end"><a href="/logout">logout</a></div>
+        <form action="/rent_thecar" method="post">
+            {% csrf_token %}
+            <div class="block">
+                <input type="hidden" name="car_id" value="{{car.id}}">
+                <h3>Car: {{car.the_type}}</h3>
+                <p>Manufacturing Year: {{car.man_year}}</p>
+                <p>Rent Price: ${{car.rent_price}}</p>
+                <p>Yearly Insurance: ${{car.insurance}}</p>
+                <p>Monthly Maintenance: ${{car.maintenance}}</p>
+                <p>Monthly Payments: $ {{car.payments}}</p>
+                <p>Acquiring Date: {{car.acquiring_date}}</p>
+                <p>Expected date to return <input type="date" name="return_date"></p>
+                <p>Rent Status: {% if car.rent_status%} Available {% else %} Rented {% endif %}</p>
+                <p>Variable Cost: $ {{car.variable_cost}}</p>
+            </div>
+            
+                
+                <div class="block">
+                    <h3>Customer's Info:</h3>
+                    <label>First Name:</label> <input type="text" name="cl_fname">
+                    <label>Last Name:</label> <input type="text" name="cl_lname">
+                    <label>National ID :</label> <input type="text" name="cl_id">
+                    <label>Cellphone No. :</label> <input type="text" name="cellphone">
+                </div>
+                <div class="btn-group" style="margin-top: 10px;">
+                    <button type="submit" class="btn btn-primary btn-sm">Confirm</button>
+        </form>
+        <form action="/main">
+            {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-sm">Go Back</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

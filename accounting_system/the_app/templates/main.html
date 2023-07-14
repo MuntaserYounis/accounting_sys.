@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Overview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <div class="float-end" style="margin-right: 15px;"><a href="/logout">logout</a></div>
+    <div class="container">
+    <h2>Hello {{merchant.first_name}}</h2>
+    <table class="table table-striped-columns">
+        <tr>
+            <th>ID</th>
+            <th>Car</th>
+            <th>Manufacturing Year</th>
+            <th>Rent Price</th>
+            <th>Variable cost</th>
+            <th>Rent Status</th>
+            <!-- <th>Availability Date</th> -->
+        </tr>
+        {% for car in my_cars %}
+        <tr>
+            <td>{{car.id}}</td>
+            <td><a href="/{{car.id}}/view">{{car.the_type}}</a></td>
+            <td>{{car.man_year}}</td>
+            <td>$ {{car.rent_price}}</td>
+            <td>$ {{car.variable_cost}}</td>
+            
+                
+                    <td>{% if car.rent_status %}
+                        <form action="/rent_car/{{car.id}}" method="post" >
+                            {% csrf_token %}
+                            Available <button type="submit" class="btn btn-primary btn-sm">Rent it!</button>
+                        </form>
+                        {% else %}
+                            <form action="/deliver/{{car.id}}" method="post" >
+                            {% csrf_token %}
+                            Rented<button type="submit" class="btn btn-primary btn-sm">Deliver!</button>
+                            </form>
+                        {% endif %}
+                    </td>
+            <!-- <td>{% if car.rental.exists %}
+                    {{ car.rental.first.return_date }}
+                {% else %}
+                    N/A
+            {% endif %}
+            </td> -->
+
+            
+
+
+        </tr>
+        {% endfor %}
+    </table>
+    <form action="/add_car" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-sm">Add a Car</button>
+    </form>
+    </div>
+</body>
+</html>
+
+<!-- <input type="date" name="acquiring_date"> -->
+
